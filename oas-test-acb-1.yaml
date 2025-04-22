@@ -1,102 +1,156 @@
-  openapi: "3.0.0"
-  info:
-    version: 1.0.0
-    title: oas-example
-  paths:
-    /contacts:
-      get:
-        summary: Retrieve a list of contacts
-        description: Returns a list of contacts.
-        responses:
-          '200':
-            description: Successful response
-            content:
-              application/json:
-                example:
-                  - id: 1
-                    firstName: John
-                    lastName: Doe
-                    company: Example Corp
-                  - id: 2
-                    firstName: Jane
-                    lastName: Smith
-                    company: Another Company
-
-      post:
-        summary: Create a new contact
-        description: Creates a new contact.
-        requestBody:
-          description: Contact object to be created
-          required: true
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: oas-example
+paths:
+  /contacts:
+    get:
+      summary: Retrieve a list of contacts
+      description: Returns a list of contacts.
+      responses:
+        '200':
+          description: Successful response
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Contact'
-        responses:
-          '201':
-            description: Contact created successfully
-            content:
-              application/json:
-                example:
-                  id: 3
+              example:
+                - id: 1
                   firstName: John
                   lastName: Doe
                   company: Example Corp
-          '400':
-            description: Invalid request
-          '500':
-            description: Internal server error
+                - id: 2
+                  firstName: Jane
+                  lastName: Smith
+                  company: Another Company
 
-    '/contacts/{contactId}':
-      put:
-        summary: Update a contact
-        description: Updates an existing contact based on the contact ID.
-        parameters:
-          - name: contactId
-            in: path
-            description: ID of the contact to update
-            required: true
+    post:
+      summary: Create a new contact
+      description: Creates a new contact.
+      requestBody:
+        description: Contact object to be created
+        required: true
+        content:
+          application/json:
             schema:
-              type: integer
-              format: int64
-        requestBody:
-          description: Updated contact object
-          required: true
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '201':
+          description: Contact created successfully
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Contact'
-        responses:
-          '200':
-            description: Contact updated successfully
-            content:
-              application/json:
-                example:
-                  id: 3
-                  firstName: John
-                  lastName: Doe
-                  company: Updated Corp
-          '400':
-            description: Invalid request
-          '404':
-            description: Contact not found
-          '500':
-            description: Internal server error
+              example:
+                id: 3
+                firstName: John
+                lastName: Doe
+                company: Example Corp
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
 
-  components:
-    schemas:
-      Contact:
-        type: object
-        properties:
-          id:
+  /contacts/{contactId}:
+    put:
+      summary: Update a contact
+      description: Updates an existing contact based on the contact ID.
+      parameters:
+        - name: contactId
+          in: path
+          description: ID of the contact to update
+          required: true
+          schema:
             type: integer
             format: int64
-          firstName:
-            type: string
-          lastName:
-            type: string
-          company:
-            type: string
-        required:
-          - firstName
-          - lastName
+      requestBody:
+        description: Updated contact object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: Contact updated successfully
+          content:
+            application/json:
+              example:
+                id: 3
+                firstName: John
+                lastName: Doe
+                company: Updated Corp
+        '400':
+          description: Invalid request
+        '404':
+          description: Contact not found
+        '500':
+          description: Internal server error
+
+  /companies:
+    get:
+      summary: Retrieve a list of companies
+      description: Returns a list of all companies.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Example Corp
+                  industry: Technology
+                - id: 2
+                  name: Another Company
+                  industry: Finance
+
+    post:
+      summary: Create a new company
+      description: Creates a new company record.
+      requestBody:
+        description: Company object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '201':
+          description: Company created successfully
+          content:
+            application/json:
+              example:
+                id: 3
+                name: New Company
+                industry: Healthcare
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        company:
+          type: string
+      required:
+        - firstName
+        - lastName
+
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        industry:
+          type: string
+      required:
+        - name
