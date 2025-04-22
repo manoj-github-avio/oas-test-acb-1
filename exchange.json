@@ -1,0 +1,11 @@
+{
+  "main": "oas-test-acb-1.yaml",
+  "name": "oas-test-acb-1",
+  "classifier": "oas",
+  "organizationId": "0d4e4815-57d5-4524-bc7d-be2d536b0174",
+  "descriptorVersion": "1.0.0",
+  "tags": [],
+  "groupId": "0d4e4815-57d5-4524-bc7d-be2d536b0174",
+  "assetId": "oas-test-acb-1",
+  "version": "1.0.0"
+}
